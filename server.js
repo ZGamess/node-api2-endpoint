@@ -60,7 +60,7 @@ app.get("/top_customers", function (req, res) {
 // เรียงลับดับจากคนที่ซื้อเยอะ => น้อยที่สุด
 app.get('/top_products', function(req, res){
   connection.query(
-    `SELECT O.ID, P.ชื่อสินค้า, O.QTY, SUM(O.QTY*P.ราคา) as Total_QTY FROM a1_orders as O INNER JOIN a1_products as P ON O.PID = P.PID GROUP BY O.ID, P.ชื่อสินค้า, O.QTY, P.ราคา ORDER BY Total_QTY DESC;`,
+    `SELECT O.ID, P.ชื่อสินค้า, O.QTY, O.QTY as Total_QTY FROM a1_orders as O INNER JOIN a1_products as P ON O.PID = P.PID GROUP BY O.ID, P.ชื่อสินค้า, O.QTY, P.ราคา ORDER BY Total_QTY DESC;`,
     function (err, results) {
       res.json(results);
     }
